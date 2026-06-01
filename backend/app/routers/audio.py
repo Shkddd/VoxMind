@@ -13,6 +13,7 @@ from app.models.schemas import AudioUploadResponse, AudioDetail, Summary, Speake
 from app.services.transcription import transcribe
 from app.services.summarization import summarize
 from app.services.vector_store import VectorStore
+from app.services.im_push import auto_push_meeting
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/audio", tags=["audio"])
@@ -109,6 +110,14 @@ def _process_audio_background(rec_id: str, file_path: str, title: str,
                 "recorded_at": recorded_at,
                 "duration": result.get("duration", 0),
             })
+
+            # 5. Auto-push to Feishu / IM if configured
+            if settings.auto_push_meetings and settings.feishu_webhook_url:
+                auto_push_meeting(
+                    settings.feishu_webhook_url,
+                    rec_id, title, summary_data,
+                    result.get("duration", 0),
+                )
 
             logger.info(f"Completed processing {rec_id}")
 

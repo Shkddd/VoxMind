@@ -130,6 +130,48 @@ WebSocket 流式问答，逐 token 推送答案。
 
 ---
 
+## 语音问答（录音笔端）
+
+### `POST /ask/voice`
+
+录音笔**语音提问**：发一段语音问历史会议内容。
+
+**Request:**
+- `Content-Type: multipart/form-data`
+- Body:
+  - `file`: 录音笔说的问题语音 (WAV/MP3/M4A)
+
+**Response:**
+```json
+{
+  "answer": "5月27日的周会讨论了Q2预算，需周五前提交...",
+  "sources": [
+    {"id": "rec_abc123", "title": "周会-2026-05-27", "relevance": 0.95}
+  ]
+}
+```
+
+**工作流：** 录音笔收音 → 发语音 → Whisper ASR 转文字 → 向量检索 → LLM 回答 → 返回文本（录音笔可用 TTS 朗读）
+
+### `GET /ask/direct?q=...`
+
+录音笔**文字提问**（适用于带简单文字输入能力的设备），直接传入文本查询，延迟更低。
+
+---
+
+## IM 自动推送
+
+每段录音处理完成后，若配置了飞书 Webhook URL，系统自动推送结构化会议纪要：
+
+| 配置项 | 说明 |
+|--------|------|
+| `FEISHU_WEBHOOK_URL` | 飞书机器人 Webhook 地址 |
+| `AUTO_PUSH_MEETINGS` | 设为 `true` 启用自动推送 |
+
+推送内容包含：议题列表、关键结论、待办事项（负责人+截止日期）、跳转链接。
+
+---
+
 ## 录音笔硬件接口
 
 详见 [hardware/hardware_protocol.md](../hardware/hardware_protocol.md)

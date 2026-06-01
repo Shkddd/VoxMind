@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
 from app.config import get_settings, Settings
-from app.routers import audio, chat
+from app.routers import audio, chat, voice_qa
 
 # Setup logging
 logging.basicConfig(
@@ -38,6 +38,7 @@ def create_app() -> FastAPI:
     # Routers
     app.include_router(audio.router, prefix="/api/v1")
     app.include_router(chat.router, prefix="/api/v1")
+    app.include_router(voice_qa.router, prefix="/api/v1")
 
     # Mount frontend
     frontend_path = Path(__file__).parent.parent.parent / "frontend"

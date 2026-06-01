@@ -23,6 +23,10 @@ class Settings(BaseSettings):
     chroma_persist_dir: str = "./chromadb"
     max_file_size_mb: int = 500
 
+    # IM Push (Feishu / Webhook)
+    feishu_webhook_url: str = ""
+    auto_push_meetings: bool = False
+
     # Server
     host: str = "0.0.0.0"
     port: int = 8000

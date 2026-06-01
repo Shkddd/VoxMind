@@ -35,6 +35,8 @@
 | 📋 会议摘要 | LLM 自动生成结构化会议纪要（议题/结论/待办） |
 | 🔍 语义搜索 | 基于 ChromaDB 的向量检索，自然语言查询历史会议 |
 | 💬 实时问答 | 针对已处理会议内容进行多轮对话式问答 |
+| 🎤 语音问答 | 录音笔端直接语音提问，云端 ASR + 检索 + LLM 回答 |
+| 📨 IM 推送 | 自动推送会议纪要至飞书/企业微信（Webhook） |
 | 🌐 Web 门户 | 管理后台：浏览记录、搜索、问答、播放音频 |
 | 🎤 语音交互 | 录音笔端直接语音询问，云端返回答案 |
 
@@ -80,6 +82,8 @@ open http://localhost:8000
 | `/api/v1/audio/{id}/summary` | GET | 获取会议摘要 |
 | `/api/v1/chat/question` | POST | 对历史内容提问 |
 | `/api/v1/chat/stream` | WS | WebSocket 流式问答 |
+| `/api/v1/ask/voice` | POST | 录音笔语音提问（ASR + 检索 + 回答） |
+| `/api/v1/ask/direct` | GET | 录音笔文字提问 |
 
 ## 录音笔上传协议
 
