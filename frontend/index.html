@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VoxMind — 智能录音笔云端</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-brand">🎙 VoxMind</div>
+  <div class="nav-links">
+    <a href="#" class="active" data-page="home">首页</a>
+    <a href="#" data-page="search">搜索</a>
+    <a href="#" data-page="chat">问答</a>
+  </div>
+</nav>
+
+<main class="container">
+  <!-- Home -->
+  <section id="page-home" class="page active">
+    <header class="hero">
+      <h1>智能录音笔 · 云端大脑</h1>
+      <p>录音自动上传，AI 转写、摘要、语义搜索，你的会议随时可查</p>
+    </header>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number" id="stat-recordings">—</div>
+        <div class="stat-label">已处理录音</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="stat-hours">—</div>
+        <div class="stat-label">总时长（小时）</div>
+      </div>
+    </div>
+    <div class="section-title">最近录音</div>
+    <div id="recent-list" class="recording-list">
+      <div class="loading">加载中...</div>
+    </div>
+  </section>
+
+  <!-- Search -->
+  <section id="page-search" class="page">
+    <h2>🔍 语义搜索</h2>
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="用自然语言搜索会议内容，如「Q2预算的讨论结果」">
+      <button id="search-btn">搜索</button>
+    </div>
+    <div id="search-results" class="recording-list"></div>
+  </section>
+
+  <!-- Chat -->
+  <section id="page-chat" class="page">
+    <h2>💬 对历史会议提问</h2>
+    <div id="chat-messages" class="chat-box"></div>
+    <div class="chat-input-bar">
+      <input type="text" id="chat-input" placeholder="输入你的问题...">
+      <button id="chat-btn">发送</button>
+    </div>
+  </section>
+</main>
+
+<script src="/js/app.js"></script>
+</body>
+</html>

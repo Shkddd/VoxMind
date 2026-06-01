@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/uploads:/app/uploads
+      - ./backend/chromadb:/app/chromadb
+    env_file:
+      - .env
+    environment:
+      - LLM_API_KEY=${LLM_API_KEY:-}
+    restart: unless-stopped
+
+  # Optional: frontend served separately (or via backend's static mount)
+  # frontend:
+  #   build: ./frontend
+  #   ports:
+  #     - "3000:80"
+  #   depends_on:
+  #     - backend
